@@ -19,11 +19,11 @@ install:
   - go get github.com/mattn/goveralls
 
 script:
- - bash script/coverage.sh
+  - bash script/coverage.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - goveralls -coverprofile=coverage.out -service=travis-ci
+  - $GOPATH/bin/goveralls -coverprofile=coverage.out -service=travis-ci
   - bash script/Dockerbuild.sh
 
 deploy:
