@@ -15,5 +15,5 @@ func TestGetGzip(test *testing.T) {
 
 func TestGzipLevel(test *testing.T) {
 	gzipLevel := middleware.GzipLevel()
-	assert.Equal(test, gzipLevel, gzip.DefaultCompression)
+	assert.Equal(test, gzip.DefaultCompression, gzipLevel)
 }

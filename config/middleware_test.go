@@ -3,13 +3,12 @@ package config_test
 import (
 	"testing"
 
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"github.com/sutd-statnlp/service-ladrawex/config"
+	"github.com/sutd-statnlp/service-ladrawex/util"
 )
 
-// TestSetMiddlewares .
 func TestSetMiddlewares(test *testing.T) {
-	expect := config.SetMiddleWares(gin.New())
-	assert.NotNil(test, expect)
+	routes := config.Middleware(util.CreateFakeRouter())
+	assert.NotNil(test, routes)
 }

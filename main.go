@@ -7,15 +7,15 @@ import (
 )
 
 func main() {
-	enableProdMode, serverPort := env.LoadVariables()
-	if enableProdMode {
+
+	if env.EnableProdMode {
 		gin.SetMode(gin.ReleaseMode)
 	}
 
 	router := gin.Default()
 
-	config.SetMiddleWares(router)
-	config.SetAPIPaths(router)
+	config.Middleware(router)
+	config.API(router)
 
-	router.Run(serverPort)
+	router.Run(env.ServerAddress)
 }

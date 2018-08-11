@@ -63,10 +63,10 @@ bash script/BuildMulti.sh
 
 ```bash
     # enable production mode, default is false
-    env GBP_PROMODE=true
+    env SL_ENABLE_PROD=true
 
-    # set host address, default is :9000
-    env GBP_HOST=":8000"
+    # set server address, default is :9000
+    env SL_SERVER_ADDRESS=":8000"
 ```
 ## Docker support 
 
