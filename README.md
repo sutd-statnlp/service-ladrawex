@@ -3,7 +3,7 @@
 [![codecov](https://codecov.io/gh/sutd-statnlp/service-ladrawex/branch/master/graph/badge.svg)](https://codecov.io/gh/sutd-statnlp/service-ladrawex)
 [![Go Report Card](https://goreportcard.com/badge/github.com/sutd-statnlp/service-ladrawex)](https://goreportcard.com/report/github.com/sutd-statnlp/service-ladrawex)
 [![GoDoc](https://godoc.org/github.com/sutd-statnlp/service-ladrawex?status.svg)](https://godoc.org/github.com/sutd-statnlp/service-ladrawex)
-[![](https://images.microbadger.com/badges/image/sutd-statnlp/service-ladrawex.svg)](https://microbadger.com/images/sutd-statnlp/service-ladrawex)
+[![](https://images.microbadger.com/badges/image/statnlp/service-ladrawex.svg)](https://microbadger.com/images/statnlp/service-ladrawex)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/sutd-statnlp/service-ladrawex/blob/master/LICENSE)
 
 ## Installation
