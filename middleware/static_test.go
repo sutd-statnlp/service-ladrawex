@@ -7,7 +7,6 @@ import (
 	"github.com/sutd-statnlp/service-ladrawex/middleware"
 )
 
-// TestGetStatic .
 func TestGetStatic(test *testing.T) {
 	expect := middleware.Static()
 	assert.NotNil(test, expect)

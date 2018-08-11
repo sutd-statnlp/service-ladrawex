@@ -8,14 +8,18 @@ import (
 	"github.com/gin-contrib/cors"
 )
 
-// Cors gets cors middleware.
+// Cors creates cors middleware.
 func Cors() gin.HandlerFunc {
-	return cors.New(cors.Config{
+	return cors.New(CorsConfig())
+}
+
+// CorsConfig creates cors config.
+func CorsConfig() cors.Config {
+	return cors.Config{
 		AllowAllOrigins:  true,
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE"},
-		AllowHeaders:     []string{"Origin"},
-		ExposeHeaders:    []string{"Content-Length"},
 		AllowCredentials: true,
+		AllowHeaders:     []string{"Origin"},
 		MaxAge:           12 * time.Hour,
-	})
+	}
 }

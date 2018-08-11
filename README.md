@@ -35,7 +35,7 @@ go test ./...
 Or run all tests with coverage
 
 ```
-bash script/coverage.sh
+bash script/TestCoverage.sh
 ```
 
 ## Build and Run

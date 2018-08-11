@@ -5,7 +5,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Gzip gets gzip middleware.
+// Gzip creates gzip middleware.
 func Gzip() gin.HandlerFunc {
-	return gzip.Gzip(gzip.DefaultCompression)
+	return gzip.Gzip(GzipLevel())
+}
+
+// GzipLevel returns gzip level.
+func GzipLevel() int {
+	return gzip.DefaultCompression
 }
