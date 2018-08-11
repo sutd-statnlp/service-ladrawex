@@ -4,7 +4,7 @@ set -e
 echo "" > coverage.out
 
 for d in $(go list ./... | grep -v vendor); do
-    go test -race -coverprofile=profile.out -covermode=atomic "$d"
+    go test -v -covermode=count -coverprofile=profile.out "$d"
     if [ -f profile.out ]; then
         cat profile.out >> coverage.out
         rm profile.out
