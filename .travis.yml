@@ -15,14 +15,14 @@ go:
 install:
 
 script:
-  - bash script/TestCoverage.sh
+  - bash script/test-coverage.sh
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-  - bash script/Dockerbuild.sh
+  - bash script/docker-build.sh
 
 deploy:
   provider: script
-  script: bash script/Dockerpush.sh
+  script: bash script/docker-push.sh
   on:
     branch: master    

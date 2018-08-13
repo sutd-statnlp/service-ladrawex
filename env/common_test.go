@@ -8,9 +8,9 @@ import (
 )
 
 func TestEnableProdMode(test *testing.T) {
-	assert.False(test, env.EnableProdMode)
+	assert.False(test, env.EnableProdMode())
 }
 
 func TestServerAddress(test *testing.T) {
-	assert.Equal(test, env.ServerAddress, ":9000")
+	assert.Equal(test, env.ServerAddress(), ":9000")
 }

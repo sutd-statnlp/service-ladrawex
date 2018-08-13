@@ -1,7 +1,7 @@
-package util
+package sliceutil
 
-// StringSliceContains returns true when the slice contains given strings, otherwise false.
-func StringSliceContains(slice []string, inputStrings ...string) bool {
+// ContainString returns true when the slice contains given strings, otherwise false.
+func ContainString(slice []string, inputStrings ...string) bool {
 	inputLen := len(inputStrings)
 	if inputLen == 0 {
 		return false

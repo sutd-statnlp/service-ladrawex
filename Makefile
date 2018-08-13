@@ -2,18 +2,25 @@ GOFMT ?= gofmt "-s"
 PACKAGES ?= $(shell go list ./... | grep -v /vendor/)
 GOFILES := $(shell find . -name "*.go" -type f -not -path "./vendor/*")
 
-all: install
+all: test
 
-install:
-	go get github.com/sutd-statnlp/service-ladrawex
-	go get -u github.com/golang/dep/cmd/dep
-	dep ensure
+run: 
+	bash script/run.sh	
 
 test:
-	bash script/coverage.sh
+	bash script/test.sh
+
+test-cov:
+	bash script/test-coverage.sh	
 
 build:
-	bash script/BuildMulti.sh
+	bash script/build.sh
 
-buildDocker:
-	docker build -t sutd-statnlp/service-ladrawex .
+build-multi:
+	bash script/build-multi.sh
+
+docker:
+	bash script/docker-build.sh
+
+docker-push:
+	bash script/docker-push.sh

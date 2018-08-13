@@ -24,7 +24,7 @@ go get -u github.com/golang/dep/cmd/dep
 dep ensure
 ```
 
-## Running the tests
+## Testing
 
 Run all tests
 
@@ -35,7 +35,7 @@ go test ./...
 Or run all tests with coverage
 
 ```
-bash script/TestCoverage.sh
+bash script/test-coverage.sh
 ```
 
 ## Build and Run
@@ -49,14 +49,14 @@ go run main.go
 Build and run native binary
 
 ``` bash
-bash script/Build.sh
+bash script/build.sh
 
 ./service-ladrawex.out
 ```
 Build native binary for multiple platforms (darwin, windows and linux)
 
 ```
-bash script/BuildMulti.sh
+bash script/build-multi.sh
 ```
 
 ## Environment variables
@@ -73,7 +73,7 @@ bash script/BuildMulti.sh
 Build docker image
 
 ```
-bash script/Dockerbuild.sh
+bash script/docker-build.sh
 ```
 
 Run docker container
