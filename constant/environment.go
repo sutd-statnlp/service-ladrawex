@@ -1,9 +1,9 @@
 package constant
 
 const (
-	// EnableProdMode is the environment key for enabling production mode.
-	EnableProdMode = "SL_ENABLE_PROD"
+	// EnvEnableProd is the environment key for enabling production mode.
+	EnvEnableProd = "SL_ENABLE_PROD"
 
-	// ServerAddress is the environment key for specifying server address.
-	ServerAddress = "SL_SERVER_ADDRESS"
+	// EnvServerAddress is the environment key for specifying server address.
+	EnvServerAddress = "SL_SERVER_ADDRESS"
 )

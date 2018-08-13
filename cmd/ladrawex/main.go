@@ -9,7 +9,7 @@ func main() {
 	var webServer server.WebServer
 
 	webServer = server.GinWebServer{
-		ServerAddress: env.ServerAddress(),
+		ServerAddress: env.ServerAddress,
 	}
 
 	webServer.Run()

@@ -4,12 +4,14 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/sutd-statnlp/service-ladrawex/log"
 
 	"github.com/gin-contrib/cors"
 )
 
 // Cors creates cors middleware.
 func Cors() gin.HandlerFunc {
+	log.Debug("Request to create cors middleware")
 	return cors.New(CorsConfig())
 }
 

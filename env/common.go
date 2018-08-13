@@ -2,14 +2,20 @@ package env
 
 import (
 	"github.com/sutd-statnlp/service-ladrawex/constant"
+	"github.com/sutd-statnlp/service-ladrawex/log"
 )
 
-// EnableProdMode enables production mode.
-func EnableProdMode() bool {
-	return Bool(constant.EnableProdMode, false)
-}
+var (
+	// EnableProdMode enables production mode.
+	EnableProdMode bool
 
-// ServerAddress is the server address for running web server.
-func ServerAddress() string {
-	return String(constant.ServerAddress, ":9000")
+	// ServerAddress is the server address for running web server.
+	ServerAddress string
+)
+
+// init loads environment variables.
+func init() {
+	log.Debug("Init loads environment variables")
+	EnableProdMode = Bool(constant.EnvEnableProd, false)
+	ServerAddress = String(constant.EnvServerAddress, constant.ServerAddress)
 }

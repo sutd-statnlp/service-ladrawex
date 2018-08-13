@@ -14,7 +14,7 @@ func TestConfig(test *testing.T) {
 	assert.NotNil(test, webServer)
 	assert.True(test, webServer.Config())
 
-	os.Setenv(constant.EnableProdMode, "true")
+	os.Setenv(constant.EnvEnableProd, "true")
 	assert.True(test, webServer.Config())
 
 }

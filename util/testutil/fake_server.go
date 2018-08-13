@@ -8,7 +8,7 @@ import (
 // CreateFakeServer returns the fake router for testing.
 func CreateFakeServer() server.WebServer {
 	gin.SetMode(gin.TestMode)
-	return server.GinWebServer{
+	return &server.GinWebServer{
 		ServerAddress: ":8080",
 	}
 }
