@@ -1,0 +1,10 @@
+app:
+  web:
+    server_address: ":9000"
+    middleware:
+      cors:
+        enable: false
+      gzip:
+        enable: false
+      static:
+        enable: true

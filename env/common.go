@@ -6,8 +6,8 @@ import (
 )
 
 var (
-	// EnableProdMode enables production mode.
-	EnableProdMode bool
+	// EnvMode is the mode of running environment.
+	EnvMode string
 
 	// ServerAddress is the server address for running web server.
 	ServerAddress string
@@ -16,6 +16,6 @@ var (
 // init loads environment variables.
 func init() {
 	log.Debug("Init loads environment variables")
-	EnableProdMode = Bool(constant.EnvEnableProd, false)
-	ServerAddress = String(constant.EnvServerAddress, constant.ServerAddress)
+	EnvMode = String(constant.EnvMode, constant.DevEnv)
+	ServerAddress = String(constant.EnvServerAddress, constant.DefaultServerAddress)
 }

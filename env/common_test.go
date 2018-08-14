@@ -8,10 +8,10 @@ import (
 	"github.com/sutd-statnlp/service-ladrawex/env"
 )
 
-func TestEnableProdMode(test *testing.T) {
-	assert.False(test, env.EnableProdMode)
+func TestEnvMode(test *testing.T) {
+	assert.Equal(test, env.EnvMode, constant.DevEnv)
 }
 
 func TestServerAddress(test *testing.T) {
-	assert.Equal(test, env.ServerAddress, constant.ServerAddress)
+	assert.Equal(test, env.ServerAddress, constant.DefaultServerAddress)
 }
