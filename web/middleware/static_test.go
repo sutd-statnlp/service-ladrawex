@@ -8,6 +8,6 @@ import (
 )
 
 func TestGetStatic(test *testing.T) {
-	expect := middleware.Static()
+	expect := middleware.Static("/path")
 	assert.NotNil(test, expect)
 }

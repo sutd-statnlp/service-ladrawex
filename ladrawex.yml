@@ -1,5 +1,10 @@
 web:
   serverAddress: ":9000"
+  staticPath: "/web/static"
   middleware:
     static:
       enable: true
+log:
+  level: "DEBUG"
+  enableFile: false
+  filePath: "/default.log"

@@ -3,14 +3,15 @@ package config
 // WebConfig is the web configuration.
 type WebConfig struct {
 	ServerAddress string
-	Middleware    MiddlewareConfig
+	StaticPath    string
+	Middleware    *MiddlewareConfig
 }
 
 // MiddlewareConfig is the middleware configuration.
 type MiddlewareConfig struct {
-	Cors   CorsConfig
-	Gzip   GzipConfig
-	Static StaticConfig
+	Cors   *CorsConfig
+	Gzip   *GzipConfig
+	Static *StaticConfig
 }
 
 // CorsConfig is the cors configuration.

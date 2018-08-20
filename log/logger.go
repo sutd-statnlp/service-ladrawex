@@ -4,21 +4,30 @@ import (
 	"os"
 
 	"github.com/sirupsen/logrus"
+	"github.com/sutd-statnlp/service-ladrawex/config"
 )
 
 var (
-	logger  *logrus.Entry
-	logFile *os.File
+	logger    *logrus.Entry
+	logFile   *os.File
+	logConfig *config.LogConfig
 )
 
 // Init configures logger.
 func init() {
+	logConfig := config.Default().Log
 
 	logFields := logrus.Fields{}
 	logger = logrus.StandardLogger().WithFields(logFields)
-
-	logrus.SetLevel(logrus.DebugLevel)
 	logrus.SetOutput(os.Stdout)
+
+	level, err := logrus.ParseLevel(logConfig.Level)
+	if err != nil {
+		Error(err)
+		level = logrus.DebugLevel
+	}
+	logrus.SetLevel(level)
+
 }
 
 // Info logs message at level Info.
@@ -52,7 +61,8 @@ func Panic(args ...interface{}) {
 }
 
 // OpenFile opens file for writing logging messages.
-func OpenFile(filePath string) bool {
+func OpenFile() bool {
+	filePath := logConfig.FilePath
 	Debug("Request to open file with path: ", filePath)
 	var err error
 	logFile, err = os.OpenFile(filePath, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)

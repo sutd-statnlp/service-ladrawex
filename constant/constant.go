@@ -7,6 +7,9 @@ const (
 
 	// EnvMode is the environment key for running environment mode.
 	EnvMode = "SL_ENV_MODE"
+
+	// EnvBasePath is the environment key for base path.
+	EnvBasePath = "SL_BASE_PATH"
 )
 
 const (
@@ -16,15 +19,14 @@ const (
 	// ProdEnv is the production environment.
 	ProdEnv = "prod"
 
-	// LogFilePath is the the path of logging file.
-	LogFilePath = "./default.log"
-
 	// DefaultServerAddress is the default web server address.
 	DefaultServerAddress = ":9000"
 
-	// WebViewPath is the path of web ui.
-	WebViewPath = "./web/view"
+	// DefaultProjectPath is the path of project.
+	DefaultProjectPath = "github.com/sutd-statnlp/service-ladrawex"
+)
 
+const (
 	// ConfigName is the default config file name.
 	ConfigName = "ladrawex"
 
@@ -39,7 +41,4 @@ const (
 
 	// ConfigType is the type of config file.
 	ConfigType = "yaml"
-
-	// BasePath is the base path of project.
-	BasePath = "github.com/sutd-statnlp/service-ladrawex"
 )

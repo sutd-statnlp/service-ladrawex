@@ -5,3 +5,5 @@ web:
       enable: true
     gzip:
       enable: true
+log:
+  level: "INFO"      
