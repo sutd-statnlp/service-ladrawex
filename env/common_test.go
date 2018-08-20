@@ -15,3 +15,8 @@ func TestEnvMode(test *testing.T) {
 func TestServerAddress(test *testing.T) {
 	assert.Equal(test, env.ServerAddress, constant.DefaultServerAddress)
 }
+
+func TestGoPath(test *testing.T) {
+	assert.NotNil(test, env.GoPath)
+	assert.True(test, len(env.GoPath) > 0)
+}

@@ -1,0 +1,6 @@
+web:
+  middleware:
+    cors:
+      enable: false
+    gzip:
+      enable: false

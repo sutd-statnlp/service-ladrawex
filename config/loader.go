@@ -6,6 +6,7 @@ import (
 	"github.com/sutd-statnlp/service-ladrawex/constant"
 	"github.com/sutd-statnlp/service-ladrawex/env"
 	"github.com/sutd-statnlp/service-ladrawex/log"
+	"github.com/sutd-statnlp/service-ladrawex/util/fileutil"
 )
 
 var (
@@ -13,23 +14,37 @@ var (
 	loader *viper.Viper
 
 	// appConfig is app configuration that holds configured values.
-	appConfig AppConfig
+	appConfig *AppConfig
 )
 
 // Init intialize viper config.
 func init() {
 	log.Debug("Init to load config files with environment:", env.EnvMode)
 	loader = viper.New()
-	loader.SetConfigName(constant.DevConfigName)
+	loader.SetConfigName(constant.ConfigName)
+	loader.AddConfigPath(fileutil.FullPath(constant.ConfigPath))
+	loader.SetConfigType(constant.ConfigType)
+	Load()
+
 	if env.EnvMode == constant.ProdEnv {
 		loader.SetConfigName(constant.ProdConfigName)
+	} else {
+		loader.SetConfigName(constant.DevConfigName)
 	}
-	loader.AddConfigPath(constant.ConfigPath)
-	viper.SetConfigType(constant.ConfigType)
+	Merge()
 
-	if Load() {
-		appConfig = New()
+	appConfig = New()
+}
+
+// Merge combines config files.
+func Merge() bool {
+	log.Debug("Request to merge config files")
+	err := loader.MergeInConfig()
+	if err != nil {
+		log.Error(err)
+		return false
 	}
+	return true
 }
 
 // Load loads all configurations from yaml files.
@@ -49,17 +64,23 @@ func Watch() bool {
 	loader.WatchConfig()
 	loader.OnConfigChange(func(e fsnotify.Event) {
 		log.Debug("Config file changed:", e.Name)
-		log.Debug("app.server_address")
 	})
 	return loader != nil
 }
 
 // New reates new app configuration.
-func New() AppConfig {
+func New() *AppConfig {
 	log.Debug("Request to create new app config")
-	serverAddress := loader.GetString("app.server_address")
-	appConfig := AppConfigImpl{
-		serverAddress: &serverAddress,
+	var config AppConfig
+	err := loader.Unmarshal(&config)
+	if err != nil {
+		log.Error(err)
+		return nil
 	}
+	return &config
+}
+
+// Default returns the default app configuration.
+func Default() *AppConfig {
 	return appConfig
 }

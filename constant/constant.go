@@ -7,7 +7,9 @@ const (
 
 	// EnvMode is the environment key for running environment mode.
 	EnvMode = "SL_ENV_MODE"
+)
 
+const (
 	// DevEnv is the development environment.
 	DevEnv = "dev"
 
@@ -23,15 +25,21 @@ const (
 	// WebViewPath is the path of web ui.
 	WebViewPath = "./web/view"
 
+	// ConfigName is the default config file name.
+	ConfigName = "ladrawex"
+
 	// DevConfigName is the config file name for development.
-	DevConfigName = "ladrawex"
+	DevConfigName = "ladrawex-dev"
 
 	// ProdConfigName is the config file name for production.
 	ProdConfigName = "ladrawex-prod"
 
 	// ConfigPath is the path for finding config files.
-	ConfigPath = "../"
+	ConfigPath = "/"
 
 	// ConfigType is the type of config file.
 	ConfigType = "yaml"
+
+	// BasePath is the base path of project.
+	BasePath = "github.com/sutd-statnlp/service-ladrawex"
 )

@@ -12,3 +12,9 @@ func TestAbsPath(test *testing.T) {
 	assert.NotNil(test, path)
 	assert.True(test, len(path) > 0)
 }
+
+func TestFullPath(test *testing.T) {
+	path := fileutil.FullPath("sample.txt")
+	assert.NotNil(test, path)
+	assert.True(test, len(path) > 0)
+}
