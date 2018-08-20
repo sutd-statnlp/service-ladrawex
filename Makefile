@@ -8,7 +8,7 @@ run:
 	bash script/run.sh
 
 run-prod: 
-	env SL_ENV_MODE=prod go run cmd/ladrawex/main.go
+	env SL_MODE=prod make run
 
 test:
 	bash script/test.sh

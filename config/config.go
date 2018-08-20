@@ -2,6 +2,8 @@ package config
 
 // AppConfig is the app configuration.
 type AppConfig struct {
-	Web *WebConfig
-	Log *LogConfig
+	Mode   string
+	Web    *WebConfig
+	Log    *LogConfig
+	Loader *LoaderConfig
 }

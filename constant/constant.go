@@ -2,25 +2,28 @@ package constant
 
 const (
 
-	// EnvServerAddress is the environment key for specifying server address.
-	EnvServerAddress = "SL_SERVER_ADDRESS"
+	// EnvPrefix is the prefix of environment key.
+	EnvPrefix = "SL"
+
+	// EnvWebServerAddress is the environment key for specifying server address.
+	EnvWebServerAddress = "WEB_SERVER_ADDRESS"
 
 	// EnvMode is the environment key for running environment mode.
-	EnvMode = "SL_ENV_MODE"
+	EnvMode = "MODE"
 
 	// EnvBasePath is the environment key for base path.
-	EnvBasePath = "SL_BASE_PATH"
+	EnvBasePath = "BASE_PATH"
+
+	// EnvLogLevel is the environment key for log level.
+	EnvLogLevel = "LOG_LEVEL"
 )
 
 const (
-	// DevEnv is the development environment.
-	DevEnv = "dev"
+	// DevMode is the development mode.
+	DevMode = "dev"
 
-	// ProdEnv is the production environment.
-	ProdEnv = "prod"
-
-	// DefaultServerAddress is the default web server address.
-	DefaultServerAddress = ":9000"
+	// ProdMode is the production mode.
+	ProdMode = "prod"
 
 	// DefaultProjectPath is the path of project.
 	DefaultProjectPath = "github.com/sutd-statnlp/service-ladrawex"

@@ -1,10 +1,14 @@
 web:
   serverAddress: ":9000"
-  staticPath: "/web/static"
+  staticPath: /web/static
   middleware:
     static:
       enable: true
 log:
-  level: "DEBUG"
+  level: DEBUG
   enableFile: false
-  filePath: "/default.log" 
+  filePath: /default.log
+
+loader:
+  enableEnv: true
+  enableWatch: true

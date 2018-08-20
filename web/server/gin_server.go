@@ -41,7 +41,7 @@ func (webServer *GinWebServer) Run() {
 		log.Panic("Web server have configuration error!")
 	}
 	serverAddress := webServer.appConfig.Web.ServerAddress
-	log.Info("Web server is configured and running at ", serverAddress)
+	log.Info("Web server is configured with ", webServer.appConfig.Mode, " mode and running at ", serverAddress)
 	err := webServer.engine.Run(serverAddress)
 	if err != nil {
 		log.Panic(err)

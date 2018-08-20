@@ -21,14 +21,15 @@ func init() {
 	loader = NewLoader()
 	Load(loader)
 
-	if env.EnvMode == constant.ProdEnv {
+	if env.EnvMode == constant.ProdMode {
 		loader.SetConfigName(constant.ProdConfigName)
 	} else {
 		loader.SetConfigName(constant.DevConfigName)
 	}
 	Merge(loader)
-
 	appConfig = New()
+	LoadEnv(loader, appConfig)
+	Watch(loader, appConfig)
 }
 
 // Merge combines config files.
@@ -50,12 +51,35 @@ func Load(inputLoader *viper.Viper) bool {
 }
 
 // Watch watches changes from config files and reload.
-func Watch(inputLoader *viper.Viper) bool {
+func Watch(inputLoader *viper.Viper, inputAppConfig *AppConfig) bool {
+	if !inputAppConfig.Loader.EnableWatch {
+		return false
+	}
 	inputLoader.WatchConfig()
 	inputLoader.OnConfigChange(func(e fsnotify.Event) {
-
+		Load(inputLoader)
+		inputAppConfig = New()
 	})
-	return inputLoader != nil
+	return true
+}
+
+// LoadEnv loads environments to overide config file.
+func LoadEnv(inputLoader *viper.Viper, inputAppConfig *AppConfig) bool {
+	if !inputAppConfig.Loader.EnableEnv {
+		return false
+	}
+	inputLoader.SetEnvPrefix(constant.EnvPrefix)
+	inputLoader.AutomaticEnv()
+	if inputLoader.IsSet(constant.EnvMode) {
+		inputAppConfig.Mode = inputLoader.GetString(constant.EnvMode)
+	}
+	if inputLoader.IsSet(constant.EnvWebServerAddress) {
+		inputAppConfig.Web.ServerAddress = inputLoader.GetString(constant.EnvWebServerAddress)
+	}
+	if inputLoader.IsSet(constant.EnvLogLevel) {
+		inputAppConfig.Log.Level = inputLoader.GetString(constant.EnvLogLevel)
+	}
+	return true
 }
 
 // New reates new app configuration.

@@ -1,3 +1,4 @@
+mode: prod
 web:
   serverAddress: ":8000"
   middleware:
@@ -6,4 +7,5 @@ web:
     gzip:
       enable: true
 log:
-  level: "INFO"      
+  level: INFO
+  enableFile: true      

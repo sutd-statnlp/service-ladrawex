@@ -9,11 +9,7 @@ import (
 )
 
 func TestEnvMode(test *testing.T) {
-	assert.Equal(test, env.EnvMode, constant.DevEnv)
-}
-
-func TestServerAddress(test *testing.T) {
-	assert.Equal(test, env.ServerAddress, constant.DefaultServerAddress)
+	assert.Equal(test, env.EnvMode, constant.DevMode)
 }
 
 func TestBasePath(test *testing.T) {

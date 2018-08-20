@@ -13,6 +13,6 @@ func TestString(test *testing.T) {
 	assert.Equal(test, "value", env.String("AA", "value"))
 	assert.Equal(test, "value", env.String("", "value"))
 
-	os.Setenv("BB", "bb")
+	os.Setenv("SL_BB", "bb")
 	assert.Equal(test, "bb", env.String("BB", "value"))
 }

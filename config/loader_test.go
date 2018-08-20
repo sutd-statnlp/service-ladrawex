@@ -28,7 +28,19 @@ func (suite *LoaderTestSuite) TestLoad() {
 }
 
 func (suite *LoaderTestSuite) TestWatch() {
-	suite.True(config.Watch(suite.loader))
+	appConfig := config.New()
+	suite.True(config.Watch(suite.loader, appConfig))
+
+	appConfig.Loader.EnableWatch = false
+	suite.False(config.Watch(suite.loader, appConfig))
+}
+
+func (suite *LoaderTestSuite) TestLoadEnv() {
+	appConfig := config.New()
+	suite.True(config.LoadEnv(suite.loader, appConfig))
+
+	appConfig.Loader.EnableEnv = false
+	suite.False(config.LoadEnv(suite.loader, appConfig))
 }
 
 func TestLoaderTestSuite(test *testing.T) {
