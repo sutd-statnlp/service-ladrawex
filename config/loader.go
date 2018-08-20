@@ -18,25 +18,22 @@ var (
 
 // Init intialize viper config.
 func init() {
-	loader = viper.New()
-	loader.SetConfigName(constant.ConfigName)
-	loader.AddConfigPath(fileutil.FullPath(constant.ConfigPath))
-	loader.SetConfigType(constant.ConfigType)
-	Load()
+	loader = NewLoader()
+	Load(loader)
 
 	if env.EnvMode == constant.ProdEnv {
 		loader.SetConfigName(constant.ProdConfigName)
 	} else {
 		loader.SetConfigName(constant.DevConfigName)
 	}
-	Merge()
+	Merge(loader)
 
 	appConfig = New()
 }
 
 // Merge combines config files.
-func Merge() bool {
-	err := loader.MergeInConfig()
+func Merge(inputLoader *viper.Viper) bool {
+	err := inputLoader.MergeInConfig()
 	if err != nil {
 		return false
 	}
@@ -44,8 +41,8 @@ func Merge() bool {
 }
 
 // Load loads all configurations from yaml files.
-func Load() bool {
-	err := loader.ReadInConfig()
+func Load(inputLoader *viper.Viper) bool {
+	err := inputLoader.ReadInConfig()
 	if err != nil {
 		return false
 	}
@@ -53,12 +50,12 @@ func Load() bool {
 }
 
 // Watch watches changes from config files and reload.
-func Watch() bool {
-	loader.WatchConfig()
-	loader.OnConfigChange(func(e fsnotify.Event) {
+func Watch(inputLoader *viper.Viper) bool {
+	inputLoader.WatchConfig()
+	inputLoader.OnConfigChange(func(e fsnotify.Event) {
 
 	})
-	return loader != nil
+	return inputLoader != nil
 }
 
 // New reates new app configuration.
@@ -74,4 +71,13 @@ func New() *AppConfig {
 // Default returns the default app configuration.
 func Default() *AppConfig {
 	return appConfig
+}
+
+// NewLoader creates new loader.
+func NewLoader() *viper.Viper {
+	newLoader := viper.New()
+	newLoader.SetConfigName(constant.ConfigName)
+	newLoader.AddConfigPath(fileutil.FullPath(constant.ConfigPath))
+	newLoader.SetConfigType(constant.ConfigType)
+	return newLoader
 }

@@ -5,6 +5,7 @@ import (
 
 	"github.com/sirupsen/logrus"
 	"github.com/sutd-statnlp/service-ladrawex/config"
+	"github.com/sutd-statnlp/service-ladrawex/util/fileutil"
 )
 
 var (
@@ -15,7 +16,7 @@ var (
 
 // Init configures logger.
 func init() {
-	logConfig := config.Default().Log
+	logConfig = config.Default().Log
 
 	logFields := logrus.Fields{}
 	logger = logrus.StandardLogger().WithFields(logFields)
@@ -62,7 +63,7 @@ func Panic(args ...interface{}) {
 
 // OpenFile opens file for writing logging messages.
 func OpenFile() bool {
-	filePath := logConfig.FilePath
+	filePath := fileutil.FullPath(logConfig.FilePath)
 	Debug("Request to open file with path: ", filePath)
 	var err error
 	logFile, err = os.OpenFile(filePath, os.O_RDWR|os.O_APPEND|os.O_CREATE, 0666)
@@ -77,9 +78,6 @@ func OpenFile() bool {
 // CloseFile closes logging file.
 func CloseFile() bool {
 	Debug("Request to close file: ", logFile)
-	if logFile == nil {
-		return false
-	}
 	logrus.SetOutput(os.Stdout)
 	err := logFile.Close()
 	if err != nil {

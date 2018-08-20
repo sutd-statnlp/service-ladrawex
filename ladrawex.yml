@@ -7,4 +7,4 @@ web:
 log:
   level: "DEBUG"
   enableFile: false
-  filePath: "/default.log"
+  filePath: "/default.log" 

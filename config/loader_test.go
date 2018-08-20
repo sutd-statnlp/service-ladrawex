@@ -3,20 +3,41 @@ package config_test
 import (
 	"testing"
 
+	"github.com/spf13/viper"
+
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/suite"
 	"github.com/sutd-statnlp/service-ladrawex/config"
 )
 
-func TestLoad(test *testing.T) {
-	assert.True(test, config.Load())
+type LoaderTestSuite struct {
+	suite.Suite
+	loader *viper.Viper
 }
 
-func TestWatch(test *testing.T) {
-	assert.True(test, config.Watch())
+func (suite *LoaderTestSuite) SetupTest() {
+	suite.loader = config.NewLoader()
 }
 
-func TestMerge(test *testing.T) {
-	assert.True(test, config.Merge())
+func (suite *LoaderTestSuite) TestMerge() {
+	suite.True(config.Merge(suite.loader))
+}
+
+func (suite *LoaderTestSuite) TestLoad() {
+	suite.True(config.Load(suite.loader))
+}
+
+func (suite *LoaderTestSuite) TestWatch() {
+	suite.True(config.Watch(suite.loader))
+}
+
+func TestLoaderTestSuite(test *testing.T) {
+	suite.Run(test, new(LoaderTestSuite))
+}
+
+func TestNewLoader(test *testing.T) {
+	loader := config.NewLoader()
+	assert.NotNil(test, loader)
 }
 
 func TestDefault(test *testing.T) {
@@ -28,6 +49,8 @@ func TestDefault(test *testing.T) {
 	assert.NotNil(test, appConfig.Web.Middleware.Cors)
 	assert.NotNil(test, appConfig.Web.Middleware.Gzip)
 	assert.NotNil(test, appConfig.Web.Middleware.Static)
+	assert.NotNil(test, appConfig.Log)
+	assert.NotNil(test, appConfig.Log.FilePath)
 }
 
 func TestNew(test *testing.T) {
@@ -39,4 +62,6 @@ func TestNew(test *testing.T) {
 	assert.NotNil(test, appConfig.Web.Middleware.Cors)
 	assert.NotNil(test, appConfig.Web.Middleware.Gzip)
 	assert.NotNil(test, appConfig.Web.Middleware.Static)
+	assert.NotNil(test, appConfig.Log)
+	assert.NotNil(test, appConfig.Log.FilePath)
 }

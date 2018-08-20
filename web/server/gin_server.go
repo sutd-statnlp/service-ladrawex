@@ -16,7 +16,7 @@ type GinWebServer struct {
 }
 
 // Config configures web server before starting.
-func (webServer GinWebServer) Config() bool {
+func (webServer *GinWebServer) Config() bool {
 	gin.SetMode(gin.ReleaseMode)
 
 	middlewareConfig := webServer.appConfig.Web.Middleware
@@ -36,7 +36,7 @@ func (webServer GinWebServer) Config() bool {
 }
 
 // Run starts web server with Gin Engine.
-func (webServer GinWebServer) Run() {
+func (webServer *GinWebServer) Run() {
 	if !webServer.Config() {
 		log.Panic("Web server have configuration error!")
 	}

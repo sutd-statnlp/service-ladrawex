@@ -13,7 +13,6 @@ func TestOpenFile(test *testing.T) {
 }
 
 func TestCloseFile(test *testing.T) {
-	assert.False(test, log.CloseFile())
 	log.OpenFile()
 	assert.True(test, log.CloseFile())
 }
