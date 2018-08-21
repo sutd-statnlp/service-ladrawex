@@ -1,6 +1,6 @@
 FROM scratch
 
-ADD ./view /view/
+ADD ./web/static /web/static/
 COPY main.out /
 
 EXPOSE 8220

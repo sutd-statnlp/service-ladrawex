@@ -71,6 +71,12 @@
   revision = "ef8a98b0bbce4a65b5aa4c368430a80ddc533168"
 
 [[projects]]
+  name = "github.com/lucasb-eyer/go-colorful"
+  packages = ["."]
+  revision = "345fbb3dbcdb252d9985ee899a84963c0fa24c82"
+  version = "v1.0"
+
+[[projects]]
   name = "github.com/magiconair/properties"
   packages = ["."]
   revision = "c2353362d570a7bfa228149c62842019201cfb71"
@@ -198,6 +204,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "0e89e5e9351e66be47bc4b2d7a6d714858c0ba98d94db0aff852648989401168"
+  inputs-digest = "9478d5ac8e5e367ebf85602e0a94a3ffa22bdb354b7021120664a7b06ad1687a"
   solver-name = "gps-cdcl"
   solver-version = 1
