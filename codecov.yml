@@ -1,0 +1,4 @@
+ignore:
+  - "config/.*"
+  - "log/.*"
+  - "web/server/.*"
