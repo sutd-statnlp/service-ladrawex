@@ -7,8 +7,14 @@ import (
 // NewRectangle creates new rectangle.
 func NewRectangle() *Rectangle {
 	return &Rectangle{
+		Common: NewCommonProperty(),
+	}
+}
+
+// NewCommonProperty creates new common property.
+func NewCommonProperty() *property.Common {
+	return &property.Common{
 		Border:          property.NewBorder(),
-		Color:           new(property.Color),
 		BackgroundColor: new(property.Color),
 		Size:            new(property.Size),
 		Position:        new(property.Position),

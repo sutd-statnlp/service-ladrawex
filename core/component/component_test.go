@@ -10,9 +10,14 @@ import (
 func TestCreateNewRectangle(t *testing.T) {
 	rect := component.NewRectangle()
 	assert.NotNil(t, rect)
-	assert.NotNil(t, rect.Border)
-	assert.NotNil(t, rect.Color)
-	assert.NotNil(t, rect.BackgroundColor)
-	assert.NotNil(t, rect.Size)
-	assert.NotNil(t, rect.Position)
+	assert.NotNil(t, rect.Common)
+}
+
+func TestNewCommonProperty(t *testing.T) {
+	common := component.NewCommonProperty()
+	assert.NotNil(t, common)
+	assert.NotNil(t, common.Border)
+	assert.NotNil(t, common.BackgroundColor)
+	assert.NotNil(t, common.Size)
+	assert.NotNil(t, common.Position)
 }

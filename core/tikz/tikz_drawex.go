@@ -17,12 +17,19 @@ func (drawex *DrawexImpl) DrawRectangle(rect *component.Rectangle) string {
 		log.Error("Tikz DrawexImpl request to draw null rectangle")
 		return ""
 	}
-	latex := stringutil.Prepare(
-		`\draw (?,?) rectangle (?,?);`,
-		rect.Position.XAxis,
-		rect.Position.YAxis,
-		rect.Size.Width,
-		rect.Size.Height,
+	query := `\node [draw={rgb,255:red,?;green,?;blue,?}, line width=?mm, shape=rectangle, fill={rgb,255:red,?;green,?;blue,?}, minimum width=?mm, minimum height=?mm] at (?,?) {};`
+	latex := stringutil.Prepare(query,
+		rect.Common.Border.Color.R,
+		rect.Common.Border.Color.G,
+		rect.Common.Border.Color.B,
+		rect.Common.Border.Thick,
+		rect.Common.BackgroundColor.R,
+		rect.Common.BackgroundColor.G,
+		rect.Common.BackgroundColor.B,
+		rect.Common.Size.Width,
+		rect.Common.Size.Height,
+		rect.Common.Position.XAxis,
+		rect.Common.Position.YAxis,
 	)
 	return latex
 }
