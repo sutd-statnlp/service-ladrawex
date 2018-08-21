@@ -4,7 +4,7 @@ import (
 	"os"
 
 	"github.com/sutd-statnlp/service-ladrawex/constant"
-	"github.com/sutd-statnlp/service-ladrawex/util/stringutil"
+	"github.com/sutd-statnlp/service-ladrawex/core/stringutil"
 )
 
 var (

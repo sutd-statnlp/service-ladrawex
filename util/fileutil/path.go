@@ -3,8 +3,8 @@ package fileutil
 import (
 	"path/filepath"
 
+	"github.com/sutd-statnlp/service-ladrawex/core/stringutil"
 	"github.com/sutd-statnlp/service-ladrawex/env"
-	"github.com/sutd-statnlp/service-ladrawex/util/stringutil"
 )
 
 // AbsPath returns the absolute path.
