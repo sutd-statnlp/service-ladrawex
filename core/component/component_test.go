@@ -27,3 +27,20 @@ func TestNewCircle(t *testing.T) {
 	assert.NotNil(t, circle)
 	assert.NotNil(t, circle.Common)
 }
+
+func TestNewLine(t *testing.T) {
+	line := component.NewLine()
+	assert.NotNil(t, line)
+	assert.NotNil(t, line.Color)
+	assert.NotNil(t, line.StartPosition)
+	assert.NotNil(t, line.EndPosition)
+}
+
+func TestNewTex(t *testing.T) {
+	text := component.NewText()
+	assert.NotNil(t, text)
+	assert.NotNil(t, text.Common)
+	assert.Equal(t, uint8(255), text.Common.BackgroundColor.R)
+	assert.Equal(t, uint8(255), text.Common.BackgroundColor.G)
+	assert.Equal(t, uint8(255), text.Common.BackgroundColor.B)
+}

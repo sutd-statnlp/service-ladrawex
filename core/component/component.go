@@ -4,6 +4,11 @@ import (
 	"github.com/sutd-statnlp/service-ladrawex/core/property"
 )
 
+const (
+	// DefaultTextContent is the default content for text component.
+	DefaultTextContent = "text"
+)
+
 // NewRectangle creates new rectangle.
 func NewRectangle() *Rectangle {
 	return &Rectangle{
@@ -18,6 +23,7 @@ func NewCommonProperty() *property.Common {
 		BackgroundColor: new(property.Color),
 		Size:            new(property.Size),
 		Position:        new(property.Position),
+		Text:            new(property.Text),
 	}
 }
 
@@ -26,4 +32,25 @@ func NewCircle() *Circle {
 	return &Circle{
 		Common: NewCommonProperty(),
 	}
+}
+
+// NewLine creates new line.
+func NewLine() *Line {
+	return &Line{
+		Color:         new(property.Color),
+		StartPosition: new(property.Position),
+		EndPosition:   new(property.Position),
+	}
+}
+
+// NewText creates new text.
+func NewText() *Text {
+	text := &Text{
+		Common: NewCommonProperty(),
+	}
+	text.Common.Text.Content = DefaultTextContent
+	text.Common.BackgroundColor.R = 255
+	text.Common.BackgroundColor.G = 255
+	text.Common.BackgroundColor.B = 255
+	return text
 }

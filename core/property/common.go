@@ -6,4 +6,5 @@ type Common struct {
 	BackgroundColor *Color
 	Size            *Size
 	Position        *Position
+	Text            *Text
 }

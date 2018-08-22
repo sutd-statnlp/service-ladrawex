@@ -6,4 +6,7 @@ import "github.com/sutd-statnlp/service-ladrawex/core/component"
 type Drawex interface {
 	DrawRectangle(rect *component.Rectangle) string
 	DrawCircle(rect *component.Circle) string
+	Document(latexs ...*string) *string
+	DrawLine(line *component.Line) string
+	DrawText(text *component.Text) string
 }

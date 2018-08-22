@@ -14,4 +14,5 @@ func TestCommon(t *testing.T) {
 	assert.Nil(t, common.BackgroundColor)
 	assert.Nil(t, common.Size)
 	assert.Nil(t, common.Position)
+	assert.Nil(t, common.Text)
 }
