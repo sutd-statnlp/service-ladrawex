@@ -1,1 +1,1 @@
-go build -o service-ladrawex.out .
+go build -o service-ladrawex.out ./cmd/ladrawex/

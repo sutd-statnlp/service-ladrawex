@@ -20,3 +20,10 @@ func NewCommonProperty() *property.Common {
 		Position:        new(property.Position),
 	}
 }
+
+// NewCircle creates new circle.
+func NewCircle() *Circle {
+	return &Circle{
+		Common: NewCommonProperty(),
+	}
+}

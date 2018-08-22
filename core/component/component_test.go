@@ -21,3 +21,9 @@ func TestNewCommonProperty(t *testing.T) {
 	assert.NotNil(t, common.Size)
 	assert.NotNil(t, common.Position)
 }
+
+func TestNewCircle(t *testing.T) {
+	circle := component.NewCircle()
+	assert.NotNil(t, circle)
+	assert.NotNil(t, circle.Common)
+}

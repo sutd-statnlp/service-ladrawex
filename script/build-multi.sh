@@ -1,6 +1,7 @@
 
 package_name=build
 app_name=service-ladrawex
+package=./cmd/ladrawex/
 
 platforms=("windows/amd64" "linux/amd64" "darwin/amd64")
 
