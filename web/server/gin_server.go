@@ -5,8 +5,8 @@ import (
 	"github.com/sutd-statnlp/service-ladrawex/config"
 	"github.com/sutd-statnlp/service-ladrawex/log"
 	"github.com/sutd-statnlp/service-ladrawex/util/fileutil"
-	"github.com/sutd-statnlp/service-ladrawex/web/api"
 	"github.com/sutd-statnlp/service-ladrawex/web/middleware"
+	"github.com/sutd-statnlp/service-ladrawex/web/api"
 )
 
 // GinWebServer is the implementation of WebServer interface by using Gin.
@@ -17,8 +17,6 @@ type GinWebServer struct {
 
 // Config configures web server before starting.
 func (webServer *GinWebServer) Config() bool {
-	gin.SetMode(gin.ReleaseMode)
-
 	middlewareConfig := webServer.appConfig.Web.Middleware
 	if middlewareConfig.Cors.Enable {
 		webServer.engine.Use(middleware.Cors())
@@ -30,9 +28,7 @@ func (webServer *GinWebServer) Config() bool {
 		staticPath := fileutil.FullPath(webServer.appConfig.Web.StaticPath)
 		webServer.engine.Use(middleware.Static(staticPath))
 	}
-
-	webServer.engine.RouterGroup = *api.Group()
-	return webServer.engine != nil
+	return api.Group(webServer.engine)
 }
 
 // Run starts web server with Gin Engine.

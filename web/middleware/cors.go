@@ -21,7 +21,7 @@ func CorsConfig() cors.Config {
 		AllowAllOrigins:  true,
 		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE"},
 		AllowCredentials: true,
-		AllowHeaders:     []string{"Origin"},
+		AllowHeaders:     []string{"Origin", "content-type", "accept"},
 		MaxAge:           12 * time.Hour,
 	}
 }

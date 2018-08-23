@@ -2,6 +2,6 @@ mode: dev
 web:
   middleware:
     cors:
-      enable: false
+      enable: true
     gzip:
       enable: false

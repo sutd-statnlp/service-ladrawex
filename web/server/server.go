@@ -26,6 +26,7 @@ func Default() WebServer {
 
 // New creates new web server.
 func New() WebServer {
+	gin.SetMode(gin.ReleaseMode)
 	return &GinWebServer{
 		appConfig: config.Default(),
 		engine:    gin.Default(),

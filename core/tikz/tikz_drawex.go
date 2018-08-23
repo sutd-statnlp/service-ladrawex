@@ -82,7 +82,7 @@ func (drawex *DrawexImpl) DrawCircle(circle *component.Circle) string {
 }
 
 // Document returns latex document.
-func (drawex *DrawexImpl) Document(latexs ...*string) *string {
+func (drawex *DrawexImpl) Document(latexs []*string) *string {
 	log.Debug("TikzDrawexImpl request to get latex document")
 	var buffer bytes.Buffer
 	buffer.WriteString(DocumentStart)

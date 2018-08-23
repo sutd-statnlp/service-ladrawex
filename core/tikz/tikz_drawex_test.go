@@ -69,7 +69,8 @@ func (suite *DrawexImplTestSuite) TestDrawCircle() {
 
 func (suite *DrawexImplTestSuite) TestDocument() {
 	tex := "AA"
-	doc := *suite.drawex.Document(&tex, &tex)
+	latexs := []*string{&tex, &tex}
+	doc := *suite.drawex.Document(latexs)
 	suite.NotNil(doc)
 	suite.NotNil(len(doc) > 0)
 	suite.Equal(`\documentclass{article}\usepackage{tikz}\begin{document}\begin{tikzpicture}AAAA\end{tikzpicture}\end{document}`,

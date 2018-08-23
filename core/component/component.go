@@ -49,8 +49,6 @@ func NewText() *Text {
 		Common: NewCommonProperty(),
 	}
 	text.Common.Text.Content = DefaultTextContent
-	text.Common.BackgroundColor.R = 255
-	text.Common.BackgroundColor.G = 255
-	text.Common.BackgroundColor.B = 255
+	text.Common.BackgroundColor.SetRGB(255,255,255)
 	return text
 }
