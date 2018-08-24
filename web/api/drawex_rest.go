@@ -6,13 +6,12 @@ import (
 	"encoding/json"
 	"github.com/sutd-statnlp/service-ladrawex/core/stringutil"
 	"github.com/sutd-statnlp/service-ladrawex/core"
-	"github.com/sutd-statnlp/service-ladrawex/web/apiutil"
 )
 
 // DrawexRest is the restful api of drawex.
 type DrawexRest interface {
 	PostDraw(context *gin.Context)
-	DocumentFromRequestBody(requestBody *apiutil.RequestBody) *string
+	DocumentFromRequestBody(requestBody *RequestBody) *string
 }
 
 // DrawexRestImpl is the implementation of DrawexRest interface.
@@ -28,7 +27,7 @@ func (rest *DrawexRestImpl) PostDraw(context *gin.Context) {
 		log.Error(err)
 		context.JSON(400, err.Error())
 	}
-	var requestbody apiutil.RequestBody
+	var requestbody RequestBody
 	err = json.Unmarshal(data, &requestbody)
 	if err != nil {
 		log.Error(err)
@@ -38,27 +37,23 @@ func (rest *DrawexRestImpl) PostDraw(context *gin.Context) {
 }
 
 // DocumentFromRequestBody returns latex document from request body.
-func (rest *DrawexRestImpl) DocumentFromRequestBody(requestBody *apiutil.RequestBody) *string  {
+func (rest *DrawexRestImpl) DocumentFromRequestBody(requestBody *RequestBody) *string  {
 	log.Debug("DrawexRest request to get latex doc from request body: ", stringutil.JSON(requestBody))
 	var latexs []*string
 	for _, item := range requestBody.Rectangles {
-		rect := apiutil.RectangleToComponent(&item)
-		rectLatex := rest.drawex.DrawRectangle(rect)
+		rectLatex := rest.drawex.DrawRectangle(item)
 		latexs = append(latexs, &rectLatex)
 	}
 	for _, item := range requestBody.Circles {
-		circle := apiutil.CircleToComponent(&item)
-		circleLatex := rest.drawex.DrawCircle(circle)
+		circleLatex := rest.drawex.DrawCircle(item)
 		latexs = append(latexs, &circleLatex)
 	}
 	for _, item := range requestBody.Lines {
-		line := apiutil.LineToComponent(&item)
-		lineLatex := rest.drawex.DrawLine(line)
+		lineLatex := rest.drawex.DrawLine(item)
 		latexs = append(latexs, &lineLatex)
 	}
 	for _, item := range requestBody.Texts {
-		text := apiutil.TextToComponent(&item)
-		textLatex := rest.drawex.DrawText(text)
+		textLatex := rest.drawex.DrawText(item)
 		latexs = append(latexs, &textLatex)
 	}
 	doc := rest.drawex.Document(latexs)

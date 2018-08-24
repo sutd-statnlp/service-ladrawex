@@ -8,4 +8,4 @@ web:
       enable: true
 log:
   level: INFO
-  enableFile: true      
+  enableFile: true

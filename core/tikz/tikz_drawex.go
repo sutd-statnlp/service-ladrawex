@@ -64,8 +64,8 @@ func (drawex *DrawexImpl) DrawNode(shapeName string, common *property.Common) st
 		common.BackgroundColor.B,
 		common.Size.Width,
 		common.Size.Height,
-		common.Position.XAxis,
-		common.Position.YAxis,
+		common.Position.X,
+		common.Position.Y,
 		common.Text.Content,
 	)
 	return latex
@@ -106,10 +106,10 @@ func (drawex *DrawexImpl) DrawLine(line *component.Line) string {
 		line.Color.G,
 		line.Color.B,
 		line.Width,
-		line.StartPosition.XAxis,
-		line.StartPosition.YAxis,
-		line.EndPosition.XAxis,
-		line.EndPosition.YAxis,
+		line.StartPosition.X,
+		line.StartPosition.Y,
+		line.EndPosition.X,
+		line.EndPosition.Y,
 	)
 	return latex
 }

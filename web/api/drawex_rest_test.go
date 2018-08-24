@@ -9,11 +9,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"strings"
 	"encoding/json"
-	"github.com/sutd-statnlp/service-ladrawex/web/apiutil"
 )
 
 const (
-	RequestJSON = `{"rectangles":[{"common":{"border":{"color":"#000000","thick":1},"backgroundColor":"#FFFFFF","size":{"width":40,"height":40},"position":{"x":100,"y":100},"text":{}}}],"circles":[{"common":{"border":{"color":"#000000","thick":1},"backgroundColor":"#FFFFFF","size":{"width":40,"height":40},"position":{"x":10,"y":40},"text":{}}}],"lines":[{"color":"#000000","width":2,"startPosition":{"x":500,"y":500},"endPosition":{"x":2000,"y":500}}],"texts":[{"common":{"border":{"color":null,"thick":1},"backgroundColor":"#000000","size":{"width":29.990234375,"height":22.599999999999998},"position":{"x":20,"y":20},"text":{"content":"text"}}}]}`
+	RequestJSON = `{"rectangles":[{"common":{"border":{"color":{"r":0,"g":0,"b":0},"thick":0.5},"backgroundColor":{"r":0,"g":0,"b":0},"size":{"width":10,"height":10},"position":{"x":3.3333333333333335,"y":10},"text":{}}}],"circles":[{"common":{"border":{"color":{"r":0,"g":0,"b":0},"thick":0.5},"backgroundColor":{"r":0,"g":0,"b":0},"size":{"width":10,"height":10},"position":{"x":0.3333333333333333,"y":12},"text":{}}},{"common":{"border":{"color":{"r":0,"g":0,"b":0},"thick":0.5},"backgroundColor":{"r":0,"g":0,"b":0},"size":{"width":10,"height":10},"position":{"x":4.733333333333333,"y":12},"text":{}}}],"lines":[{"color":{"r":0,"g":0,"b":0},"width":1,"startPosition":{"x":0.8333333333333334,"y":32.5},"endPosition":{"x":3.3333333333333335,"y":32.5}}],"texts":[{"common":{"border":{"color":{"r":0,"g":0,"b":0},"thick":0.5},"backgroundColor":{"r":0,"g":0,"b":0},"size":{"width":7.49755859375,"height":5.6499999999999995},"position":{"x":0.6666666666666666,"y":12.666666666666666},"text":{"content":"text"}}}]}`
 )
 
 type DrawexRestTestSuite struct {
@@ -57,7 +56,7 @@ func (suite *DrawexRestTestSuite) TestPostDraw() {
 }
 
 func (suite *DrawexRestTestSuite) TestDocumentFromRequestBody() {
-	var fakeRequestBody apiutil.RequestBody
+	var fakeRequestBody api.RequestBody
 	err := json.Unmarshal([]byte(RequestJSON), &fakeRequestBody)
 	suite.Nil(err)
 	suite.NotNil(fakeRequestBody)
