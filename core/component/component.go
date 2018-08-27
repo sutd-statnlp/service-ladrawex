@@ -49,6 +49,28 @@ func NewText() *Text {
 		Common: NewCommonProperty(),
 	}
 	text.Common.Text.Content = DefaultTextContent
-	text.Common.BackgroundColor.SetRGB(255,255,255)
+	text.Common.BackgroundColor.SetRGB(255, 255, 255)
 	return text
+}
+
+// NewTriangle creates new triangle component.
+func NewTriangle() *Triangle {
+	return &Triangle{
+		Common: NewCommonProperty(),
+	}
+}
+
+// NewPolygon creates new polygon component.
+func NewPolygon() *Polygon {
+	return &Polygon{
+		Sides:  5,
+		Common: NewCommonProperty(),
+	}
+}
+
+// NewDiamond creates new diamond component.
+func NewDiamond() *Diamond {
+	return &Diamond{
+		Common: NewCommonProperty(),
+	}
 }

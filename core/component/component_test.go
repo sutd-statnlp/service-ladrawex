@@ -36,11 +36,30 @@ func TestNewLine(t *testing.T) {
 	assert.NotNil(t, line.EndPosition)
 }
 
-func TestNewTex(t *testing.T) {
+func TestNewText(t *testing.T) {
 	text := component.NewText()
 	assert.NotNil(t, text)
 	assert.NotNil(t, text.Common)
 	assert.Equal(t, uint8(255), text.Common.BackgroundColor.R)
 	assert.Equal(t, uint8(255), text.Common.BackgroundColor.G)
 	assert.Equal(t, uint8(255), text.Common.BackgroundColor.B)
+}
+
+func TestNewTriangle(t *testing.T) {
+	item := component.NewTriangle()
+	assert.NotNil(t, item)
+	assert.NotNil(t, item.Common)
+}
+
+func TestNewPolygon(t *testing.T) {
+	item := component.NewPolygon()
+	assert.NotNil(t, item)
+	assert.NotNil(t, item.Common)
+	assert.Equal(t, uint8(5), item.Sides)
+}
+
+func TestNewDiamond(t *testing.T) {
+	item := component.NewDiamond()
+	assert.NotNil(t, item)
+	assert.NotNil(t, item.Common)
 }
