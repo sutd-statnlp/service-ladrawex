@@ -10,19 +10,30 @@ import (
 )
 
 const (
-	// NodeDrawQuery is the query for drawing tikz node.
-	NodeDrawQuery = `\node [shape=?, draw={rgb,255:red,?;green,?;blue,?}, line width=?mm, fill={rgb,255:red,?;green,?;blue,?}, minimum width=?mm, minimum height=?mm] at (?,?) {?};`
-
-	// LineDrawQuery is the query for drawing line component.
-	LineDrawQuery = `\draw [draw={rgb,255:red,?;green,?;blue,?}, line width=?mm] (?,?) -- (?,?);`
-)
-
-const (
 	// DocumentStart is the starting area of latex document.
 	DocumentStart = `\documentclass{article}\usepackage{tikz}\begin{document}\begin{tikzpicture}`
 
 	// DocumentEnd is the end area of latex document.
 	DocumentEnd = `\end{tikzpicture}\end{document}`
+)
+
+const (
+	// DrawOption is the draw style option.
+	DrawOption = "draw="
+
+	// FillOption is the fill style option.
+	FillOption = "fill="
+)
+
+const (
+	// RGBQuery is the query for drawing rgb color.
+	RGBQuery = `{rgb,255:red,?;green,?;blue,?}`
+
+	// NodeDrawQuery is the query for drawing tikz node.
+	NodeDrawQuery = `\node [shape=?, ?, line width=?mm, ?, minimum width=?mm, minimum height=?mm] at (?,?) {?};`
+
+	// LineDrawQuery is the query for drawing line component.
+	LineDrawQuery = `\draw [?, line width=?mm] (?,?) -- (?,?);`
 )
 
 const (
@@ -32,6 +43,19 @@ const (
 	// CircleShape is the name of circle shape.
 	CircleShape = "circle"
 )
+
+var (
+	// DrawRGBQuery is the query for drawing rgb.
+	DrawRGBQuery string
+
+	// FillRGBQuery is the query for filling rgb.
+	FillRGBQuery string
+)
+
+func init() {
+	DrawRGBQuery = stringutil.Concat(DrawOption, RGBQuery)
+	FillRGBQuery = stringutil.Concat(FillOption, RGBQuery)
+}
 
 // DrawexImpl is the implementation of drawex interface.
 type DrawexImpl struct {
@@ -53,15 +77,14 @@ func (drawex *DrawexImpl) DrawNode(shapeName string, common *property.Common) st
 	if common == nil {
 		return ""
 	}
+
+	borderColor := ColorToQuery(DrawRGBQuery, common.Border.Color)
+	backgroundColor := ColorToQuery(FillRGBQuery, common.BackgroundColor)
 	latex := stringutil.Prepare(NodeDrawQuery,
 		shapeName,
-		common.Border.Color.R,
-		common.Border.Color.G,
-		common.Border.Color.B,
+		borderColor,
 		common.Border.Thick,
-		common.BackgroundColor.R,
-		common.BackgroundColor.G,
-		common.BackgroundColor.B,
+		backgroundColor,
 		common.Size.Width,
 		common.Size.Height,
 		common.Position.X,
@@ -101,10 +124,9 @@ func (drawex *DrawexImpl) DrawLine(line *component.Line) string {
 		log.Error("TikzDrawexImpl request to draw null line")
 		return ""
 	}
+	color := ColorToQuery(FillRGBQuery, line.Color)
 	latex := stringutil.Prepare(LineDrawQuery,
-		line.Color.R,
-		line.Color.G,
-		line.Color.B,
+		color,
 		line.Width,
 		line.StartPosition.X,
 		line.StartPosition.Y,
