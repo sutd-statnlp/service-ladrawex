@@ -15,4 +15,5 @@ func TestLine(t *testing.T) {
 	assert.Nil(t, line.EndPosition)
 	assert.NotNil(t, line.Width)
 	assert.Equal(t, float32(0), line.Width)
+	assert.False(t, line.Dashed)
 }

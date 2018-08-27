@@ -20,7 +20,6 @@ func TestNewColor(t *testing.T) {
 	assert.Equal(t, uint8(0), color.R)
 	assert.Equal(t, uint8(0), color.G)
 	assert.Equal(t, uint8(0), color.B)
-	assert.False(t, color.Enable)
 }
 
 type ColorTestSuite struct {

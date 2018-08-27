@@ -15,4 +15,5 @@ func TestCommon(t *testing.T) {
 	assert.Nil(t, common.Size)
 	assert.Nil(t, common.Position)
 	assert.Nil(t, common.Text)
+	assert.Equal(t, int32(0), common.RotateAngle)
 }

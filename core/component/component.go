@@ -74,3 +74,10 @@ func NewDiamond() *Diamond {
 		Common: NewCommonProperty(),
 	}
 }
+
+// NewConnector creates new connector component.
+func NewConnector() *Connector {
+	return &Connector{
+		Line: NewLine(),
+	}
+}

@@ -7,9 +7,9 @@ import (
 	"github.com/sutd-statnlp/service-ladrawex/core/component"
 )
 
-func TestTriangle(t *testing.T) {
-	item := new(component.Triangle)
+func TestConnector(t *testing.T) {
+	item := new(component.Connector)
 	assert.NotNil(t, item)
-	assert.Nil(t, item.Common)
-	assert.False(t, item.RightAngled)
+	assert.Nil(t, item.Line)
+	assert.False(t, item.Bidirectional)
 }

@@ -25,16 +25,16 @@ type DrawexImplTestSuite struct {
 func (suite *DrawexImplTestSuite) SetupTest() {
 	suite.drawex = tikz.New()
 
-	suite.rectangleLatex = CreateDefaultLatex("rectangle", "")
+	suite.rectangleLatex = CreateDefaultLatex("rectangle", "", 0, 0, 0)
 	suite.fakeRectangle = CreateFakeRectangle()
 
-	suite.circleLatex = CreateDefaultLatex("circle", "")
+	suite.circleLatex = CreateDefaultLatex("circle", "", 0, 0, 0)
 	suite.fakeCircle = CreateFakeCircle()
 
 	suite.lineLatex = DefaultLineLatex
 	suite.fakeLine = CreateFakeLine()
 
-	suite.textLatex = CreateDefaultLatex("rectangle", "text")
+	suite.textLatex = CreateDefaultLatex("rectangle", "text", 255, 255, 255)
 	suite.fakeText = CreateFakeText()
 }
 

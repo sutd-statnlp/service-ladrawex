@@ -7,10 +7,9 @@ import (
 
 // Color is the property of component.
 type Color struct {
-	R      uint8
-	G      uint8
-	B      uint8
-	Enable bool
+	R uint8
+	G uint8
+	B uint8
 }
 
 // SetRGB sets rgb values.

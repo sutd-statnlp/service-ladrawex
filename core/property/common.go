@@ -7,4 +7,5 @@ type Common struct {
 	Size            *Size
 	Position        *Position
 	Text            *Text
+	RotateAngle     int32
 }

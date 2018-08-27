@@ -8,4 +8,5 @@ type Line struct {
 	Width         float32
 	StartPosition *property.Position
 	EndPosition   *property.Position
+	Dashed        bool
 }

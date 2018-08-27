@@ -13,12 +13,12 @@ import (
 
 const (
 	// DefaultLineLatex is the line latex for testing.
-	DefaultLineLatex = `\draw [, line width=0mm] (0,0) -- (0,0);`
+	DefaultLineLatex = `\draw [fill={rgb,255:red,0;green,0;blue,0}, line width=0mm] (0,0) -- (0,0);`
 )
 
 // CreateDefaultLatex creates the default latex for testing from diffrent shapes.
-func CreateDefaultLatex(shapName string, text string) string {
-	return stringutil.Prepare(`\node [shape=?, , line width=0mm, , minimum width=0mm, minimum height=0mm] at (0,0) {?};`, shapName, text)
+func CreateDefaultLatex(shapName string, text string, r, g, b uint8) string {
+	return stringutil.Prepare(`\node [shape=?, draw={rgb,255:red,0;green,0;blue,0}, line width=0mm, fill={rgb,255:red,?;green,?;blue,?}, minimum width=0mm, minimum height=0mm] at (0,0) {?};`, shapName, r, g, b, text)
 }
 
 // CreateFakeRectangle creates fake rectangle for testing.
@@ -53,9 +53,9 @@ func TestNew(t *testing.T) {
 func TestColorToQuery(t *testing.T) {
 	color := new(property.Color)
 	query := tikz.ColorToQuery("???", color)
-	assert.Equal(t, "", query)
-
-	color.Enable = true
-	query = tikz.ColorToQuery("???", color)
 	assert.Equal(t, "000", query)
+
+	color = nil
+	query = tikz.ColorToQuery("???", color)
+	assert.Equal(t, "", query)
 }

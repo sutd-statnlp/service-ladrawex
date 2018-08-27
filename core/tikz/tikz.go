@@ -26,7 +26,7 @@ func New() *DrawexImpl {
 // ColorToQuery converts color property into query.
 func ColorToQuery(query string, color *property.Color) string {
 	var result string
-	if color.Enable {
+	if color != nil {
 		result = stringutil.Prepare(query,
 			color.R,
 			color.G,

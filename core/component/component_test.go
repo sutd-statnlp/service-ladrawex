@@ -63,3 +63,9 @@ func TestNewDiamond(t *testing.T) {
 	assert.NotNil(t, item)
 	assert.NotNil(t, item.Common)
 }
+
+func TestNewConnector(t *testing.T) {
+	item := component.NewConnector()
+	assert.NotNil(t, item)
+	assert.NotNil(t, item.Line)
+}

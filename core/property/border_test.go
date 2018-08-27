@@ -13,4 +13,5 @@ func TestNewBorder(t *testing.T) {
 	assert.NotNil(t, border.Thick)
 	assert.Equal(t, float32(0), border.Thick)
 	assert.Nil(t, border.Color)
+	assert.False(t, border.Dashed)
 }
