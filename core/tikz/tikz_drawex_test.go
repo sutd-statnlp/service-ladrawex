@@ -25,6 +25,8 @@ type DrawexImplTestSuite struct {
 	fakeDiamond    *component.Diamond
 	connectorLatex string
 	fakeConnector  *component.Connector
+	polygonLatex   string
+	fakePolygon    *component.Polygon
 }
 
 func (suite *DrawexImplTestSuite) SetupTest() {
@@ -47,6 +49,9 @@ func (suite *DrawexImplTestSuite) SetupTest() {
 
 	suite.connectorLatex = DefaultConnectorLatex
 	suite.fakeConnector = CreateFakeConnector()
+
+	suite.polygonLatex = CreateDefaultLatex("regular polygon,regular polygon sides=5", "", 0, 0, 0)
+	suite.fakePolygon = CreateFakePolygon()
 }
 
 func TestDrawexImplTestSuite(t *testing.T) {
@@ -119,4 +124,16 @@ func (suite *DrawexImplTestSuite) TestDrawConnector() {
 	suite.True(len(latex) > 0)
 	suite.Equal(suite.connectorLatex, latex)
 	suite.Empty(suite.drawex.DrawConnector(nil))
+
+	suite.fakeConnector.Bidirectional = true
+	latex = suite.drawex.DrawConnector(suite.fakeConnector)
+	suite.NotEqual(suite.connectorLatex, latex)
+}
+
+func (suite *DrawexImplTestSuite) TestDrawPolygon() {
+	latex := suite.drawex.DrawPolygon(suite.fakePolygon)
+	suite.NotNil(latex)
+	suite.True(len(latex) > 0)
+	suite.Equal(suite.polygonLatex, latex)
+	suite.Empty(suite.drawex.DrawPolygon(nil))
 }

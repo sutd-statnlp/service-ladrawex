@@ -36,7 +36,10 @@ const (
 	LineDrawQuery = `\draw [?, line width=?mm] (?,?) -- (?,?);`
 
 	// ConnectorDrawQuery is the query for drawing connector component.
-	ConnectorDrawQuery = `\draw [->, >=stealth, ?, line width=?mm] (?,?) -- (?,?);`
+	ConnectorDrawQuery = `\draw [?->, >=stealth, ?, line width=?mm] (?,?) -- (?,?);`
+
+	// SideQuery is the query for polygon sides.
+	SideQuery = `sides=?`
 )
 
 const (
@@ -48,6 +51,14 @@ const (
 
 	// DiamondShape is the name of diamond shape.
 	DiamondShape = "diamond"
+
+	// PolygonShape is the name of polygon shape and its sides.
+	PolygonShape = "regular polygon"
+)
+
+const (
+	// ConnectorSecondArrow is the the second arrow of connector.
+	ConnectorSecondArrow = "<"
 )
 
 var (
@@ -169,8 +180,13 @@ func (drawex *DrawexImpl) DrawConnector(connector *component.Connector) string {
 		log.Error("TikzDrawexImpl request to draw null connector")
 		return ""
 	}
+	var secondArrow string
+	if connector.Bidirectional {
+		secondArrow = ConnectorSecondArrow
+	}
 	color := ColorToQuery(FillRGBQuery, connector.Line.Color)
 	latex := stringutil.Prepare(ConnectorDrawQuery,
+		secondArrow,
 		color,
 		connector.Line.Width,
 		connector.Line.StartPosition.X,
@@ -179,4 +195,16 @@ func (drawex *DrawexImpl) DrawConnector(connector *component.Connector) string {
 		connector.Line.EndPosition.Y,
 	)
 	return latex
+}
+
+// DrawPolygon draws a polygon and returns latex.
+func (drawex *DrawexImpl) DrawPolygon(polygon *component.Polygon) string {
+	log.Debug("TikzDrawexImpl request to draw polygon: ", stringutil.JSON(polygon))
+	if polygon == nil {
+		log.Error("TikzDrawexImpl request to draw null polygon")
+		return ""
+	}
+	sidesString := stringutil.Prepare(SideQuery, polygon.Sides)
+	polygonNameWithSides := stringutil.Concat(PolygonShape, ",", PolygonShape, " ", sidesString)
+	return drawex.DrawNode(polygonNameWithSides, polygon.Common)
 }

@@ -53,6 +53,11 @@ func CreateFakeDiamond() *component.Diamond {
 func CreateFakeConnector() *component.Connector {
 	return component.NewConnector()
 }
+
+// CreateFakePolygon creates fake polygon for testing.
+func CreateFakePolygon() *component.Polygon {
+	return component.NewPolygon()
+}
 func TestDefault(t *testing.T) {
 	drawer := tikz.Default()
 	assert.NotNil(t, drawer)
