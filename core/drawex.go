@@ -9,4 +9,5 @@ type Drawex interface {
 	Document(latexs []*string) *string
 	DrawLine(line *component.Line) string
 	DrawText(text *component.Text) string
+	DrawDiamond(diamond *component.Diamond) string
 }

@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/sutd-statnlp/service-ladrawex/core/component"
+	"github.com/sutd-statnlp/service-ladrawex/core/stringutil"
 
 	"github.com/stretchr/testify/suite"
 	"github.com/sutd-statnlp/service-ladrawex/core/tikz"
@@ -20,6 +21,8 @@ type DrawexImplTestSuite struct {
 	fakeLine       *component.Line
 	textLatex      string
 	fakeText       *component.Text
+	diamondLatex   string
+	fakeDiamond    *component.Diamond
 }
 
 func (suite *DrawexImplTestSuite) SetupTest() {
@@ -36,6 +39,9 @@ func (suite *DrawexImplTestSuite) SetupTest() {
 
 	suite.textLatex = CreateDefaultLatex("rectangle", "text", 255, 255, 255)
 	suite.fakeText = CreateFakeText()
+
+	suite.diamondLatex = CreateDefaultLatex("diamond", "", 0, 0, 0)
+	suite.fakeDiamond = CreateFakeDiamond()
 }
 
 func TestDrawexImplTestSuite(t *testing.T) {
@@ -73,7 +79,7 @@ func (suite *DrawexImplTestSuite) TestDocument() {
 	doc := *suite.drawex.Document(latexs)
 	suite.NotNil(doc)
 	suite.NotNil(len(doc) > 0)
-	suite.Equal(`\documentclass{article}\usepackage{tikz}\begin{document}\begin{tikzpicture}AAAA\end{tikzpicture}\end{document}`,
+	suite.Equal(stringutil.Concat(tikz.DocumentStart, "AAAA", tikz.DocumentEnd),
 		doc,
 	)
 }
@@ -91,5 +97,13 @@ func (suite *DrawexImplTestSuite) TestDrawText() {
 	suite.NotNil(latex)
 	suite.True(len(latex) > 0)
 	suite.Equal(suite.textLatex, latex)
+	suite.Empty(suite.drawex.DrawText(nil))
+}
+
+func (suite *DrawexImplTestSuite) TestDrawDiamond() {
+	latex := suite.drawex.DrawDiamond(suite.fakeDiamond)
+	suite.NotNil(latex)
+	suite.True(len(latex) > 0)
+	suite.Equal(suite.diamondLatex, latex)
 	suite.Empty(suite.drawex.DrawText(nil))
 }

@@ -40,6 +40,11 @@ func CreateFakeLine() *component.Line {
 func CreateFakeText() *component.Text {
 	return component.NewText()
 }
+
+// CreateFakeDiamond creates fake diamond for testing.
+func CreateFakeDiamond() *component.Diamond {
+	return component.NewDiamond()
+}
 func TestDefault(t *testing.T) {
 	drawer := tikz.Default()
 	assert.NotNil(t, drawer)

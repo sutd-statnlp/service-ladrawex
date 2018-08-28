@@ -11,7 +11,7 @@ import (
 
 const (
 	// DocumentStart is the starting area of latex document.
-	DocumentStart = `\documentclass{article}\usepackage{tikz}\begin{document}\begin{tikzpicture}`
+	DocumentStart = `\documentclass{article}\usepackage{tikz}\usetikzlibrary{shapes,snakes}\begin{document}\begin{tikzpicture}`
 
 	// DocumentEnd is the end area of latex document.
 	DocumentEnd = `\end{tikzpicture}\end{document}`
@@ -42,6 +42,9 @@ const (
 
 	// CircleShape is the name of circle shape.
 	CircleShape = "circle"
+
+	// DiamondShape is the name of diamond shape.
+	DiamondShape = "diamond"
 )
 
 var (
@@ -144,4 +147,14 @@ func (drawex *DrawexImpl) DrawText(text *component.Text) string {
 		return ""
 	}
 	return drawex.DrawNode(RectangleShape, text.Common)
+}
+
+// DrawDiamond draws a diamond and returns latex.
+func (drawex *DrawexImpl) DrawDiamond(diamon *component.Diamond) string {
+	log.Debug("TikzDrawexImpl request to draw diamond: ", stringutil.JSON(diamon))
+	if diamon == nil {
+		log.Error("TikzDrawexImpl request to draw null diamon")
+		return ""
+	}
+	return drawex.DrawNode(DiamondShape, diamon.Common)
 }
