@@ -66,6 +66,11 @@ func CreateFakePolygon() *component.Polygon {
 func CreateFakeTriangle() *component.Triangle {
 	return component.NewTriangle()
 }
+
+// CreateFakeStar creates fake star for testing.
+func CreateFakeStar() *component.Star {
+	return component.NewStar()
+}
 func TestDefault(t *testing.T) {
 	drawer := tikz.Default()
 	assert.NotNil(t, drawer)

@@ -74,3 +74,9 @@ func TestNewConnector(t *testing.T) {
 	assert.NotNil(t, item)
 	assert.NotNil(t, item.Line)
 }
+
+func TestNewStar(t *testing.T) {
+	item := component.NewStar()
+	assert.NotNil(t, item)
+	assert.NotNil(t, item.Common)
+}

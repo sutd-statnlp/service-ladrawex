@@ -29,6 +29,8 @@ type DrawexImplTestSuite struct {
 	fakePolygon    *component.Polygon
 	triangleLatex  string
 	fakeTriangle   *component.Triangle
+	starLatex      string
+	fakeStar       *component.Star
 }
 
 func (suite *DrawexImplTestSuite) SetupTest() {
@@ -57,6 +59,9 @@ func (suite *DrawexImplTestSuite) SetupTest() {
 
 	suite.triangleLatex = DefaultTriangleLatex
 	suite.fakeTriangle = CreateFakeTriangle()
+
+	suite.starLatex = CreateDefaultLatex("star,star points=0", "", 0, 0, 0)
+	suite.fakeStar = CreateFakeStar()
 }
 
 func TestDrawexImplTestSuite(t *testing.T) {
@@ -149,4 +154,11 @@ func (suite *DrawexImplTestSuite) TestDrawTriangle() {
 	suite.True(len(latex) > 0)
 	suite.Equal(suite.triangleLatex, latex)
 	suite.Empty(suite.drawex.DrawTriangle(nil))
+}
+
+func (suite *DrawexImplTestSuite) TestDrawStar() {
+	latex := suite.drawex.DrawStar(suite.fakeStar)
+	suite.True(len(latex) > 0)
+	suite.Equal(suite.starLatex, latex)
+	suite.Empty(suite.drawex.DrawStar(nil))
 }

@@ -43,6 +43,9 @@ const (
 
 	// TriangleDrawQuery is the query for drawing triangle component.
 	TriangleDrawQuery = `\draw [?, ?, line width=?mm] (?,?)  -- (?,?)  -- (?,?) -- cycle;`
+
+	// PointQuery is the query for star points.
+	PointQuery = `points=?`
 )
 
 const (
@@ -57,6 +60,9 @@ const (
 
 	// PolygonShape is the name of polygon shape and its sides.
 	PolygonShape = "regular polygon"
+
+	// StarShape is the name of star shape.
+	StarShape = "star"
 )
 
 const (
@@ -233,4 +239,16 @@ func (drawex *DrawexImpl) DrawTriangle(triangle *component.Triangle) string {
 		triangle.ThirdPosition.Y,
 	)
 	return latex
+}
+
+// DrawStar draws a star and returns latex.
+func (drawex *DrawexImpl) DrawStar(star *component.Star) string {
+	log.Debug("TikzDrawexImpl request to draw star: ", stringutil.JSON(star))
+	if star == nil {
+		log.Error("TikzDrawexImpl request to draw null star")
+		return ""
+	}
+	pointsString := stringutil.Prepare(PointQuery, star.Points)
+	starNameWithPoints := stringutil.Concat(StarShape, ",", StarShape, " ", pointsString)
+	return drawex.DrawNode(starNameWithPoints, star.Common)
 }

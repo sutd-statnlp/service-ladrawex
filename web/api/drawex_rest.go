@@ -1,11 +1,12 @@
 package api
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/sutd-statnlp/service-ladrawex/log"
 	"encoding/json"
-	"github.com/sutd-statnlp/service-ladrawex/core/stringutil"
+
+	"github.com/gin-gonic/gin"
 	"github.com/sutd-statnlp/service-ladrawex/core"
+	"github.com/sutd-statnlp/service-ladrawex/core/stringutil"
+	"github.com/sutd-statnlp/service-ladrawex/log"
 )
 
 // DrawexRest is the restful api of drawex.
@@ -37,24 +38,44 @@ func (rest *DrawexRestImpl) PostDraw(context *gin.Context) {
 }
 
 // DocumentFromRequestBody returns latex document from request body.
-func (rest *DrawexRestImpl) DocumentFromRequestBody(requestBody *RequestBody) *string  {
+func (rest *DrawexRestImpl) DocumentFromRequestBody(requestBody *RequestBody) *string {
 	log.Debug("DrawexRest request to get latex doc from request body: ", stringutil.JSON(requestBody))
 	var latexs []*string
 	for _, item := range requestBody.Rectangles {
-		rectLatex := rest.drawex.DrawRectangle(item)
-		latexs = append(latexs, &rectLatex)
+		latex := rest.drawex.DrawRectangle(item)
+		latexs = append(latexs, &latex)
 	}
 	for _, item := range requestBody.Circles {
-		circleLatex := rest.drawex.DrawCircle(item)
-		latexs = append(latexs, &circleLatex)
+		latex := rest.drawex.DrawCircle(item)
+		latexs = append(latexs, &latex)
 	}
 	for _, item := range requestBody.Lines {
-		lineLatex := rest.drawex.DrawLine(item)
-		latexs = append(latexs, &lineLatex)
+		latex := rest.drawex.DrawLine(item)
+		latexs = append(latexs, &latex)
 	}
 	for _, item := range requestBody.Texts {
-		textLatex := rest.drawex.DrawText(item)
-		latexs = append(latexs, &textLatex)
+		latex := rest.drawex.DrawText(item)
+		latexs = append(latexs, &latex)
+	}
+	for _, item := range requestBody.Diamonds {
+		latex := rest.drawex.DrawDiamond(item)
+		latexs = append(latexs, &latex)
+	}
+	for _, item := range requestBody.Polygons {
+		latex := rest.drawex.DrawPolygon(item)
+		latexs = append(latexs, &latex)
+	}
+	for _, item := range requestBody.Connectors {
+		latex := rest.drawex.DrawConnector(item)
+		latexs = append(latexs, &latex)
+	}
+	for _, item := range requestBody.Triangles {
+		latex := rest.drawex.DrawTriangle(item)
+		latexs = append(latexs, &latex)
+	}
+	for _, item := range requestBody.Stars {
+		latex := rest.drawex.DrawStar(item)
+		latexs = append(latexs, &latex)
 	}
 	doc := rest.drawex.Document(latexs)
 	log.Debug("Latex Doc: ", *doc)

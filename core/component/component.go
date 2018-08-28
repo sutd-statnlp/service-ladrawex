@@ -87,3 +87,10 @@ func NewConnector() *Connector {
 		Line: NewLine(),
 	}
 }
+
+// NewStar creates new start component.
+func NewStar() *Star {
+	return &Star{
+		Common: NewCommonProperty(),
+	}
+}
