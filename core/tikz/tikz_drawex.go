@@ -40,6 +40,9 @@ const (
 
 	// SideQuery is the query for polygon sides.
 	SideQuery = `sides=?`
+
+	// TriangleDrawQuery is the query for drawing triangle component.
+	TriangleDrawQuery = `\draw [?, ?, line width=?mm] (?,?)  -- (?,?)  -- (?,?) -- cycle;`
 )
 
 const (
@@ -207,4 +210,27 @@ func (drawex *DrawexImpl) DrawPolygon(polygon *component.Polygon) string {
 	sidesString := stringutil.Prepare(SideQuery, polygon.Sides)
 	polygonNameWithSides := stringutil.Concat(PolygonShape, ",", PolygonShape, " ", sidesString)
 	return drawex.DrawNode(polygonNameWithSides, polygon.Common)
+}
+
+// DrawTriangle draws a triangle and returns latex.
+func (drawex *DrawexImpl) DrawTriangle(triangle *component.Triangle) string {
+	log.Debug("TikzDrawexImpl request to draw triangle: ", stringutil.JSON(triangle))
+	if triangle == nil {
+		log.Error("TikzDrawexImpl request to draw null triangle")
+		return ""
+	}
+	borderColor := ColorToQuery(DrawRGBQuery, triangle.Common.Border.Color)
+	backgroundColor := ColorToQuery(FillRGBQuery, triangle.Common.BackgroundColor)
+	latex := stringutil.Prepare(TriangleDrawQuery,
+		borderColor,
+		backgroundColor,
+		triangle.Common.Border.Thick,
+		triangle.Common.Position.X,
+		triangle.Common.Position.Y,
+		triangle.SecondPosition.X,
+		triangle.SecondPosition.Y,
+		triangle.ThirdPosition.X,
+		triangle.ThirdPosition.Y,
+	)
+	return latex
 }

@@ -10,4 +10,6 @@ type Drawex interface {
 	DrawLine(line *component.Line) string
 	DrawText(text *component.Text) string
 	DrawDiamond(diamond *component.Diamond) string
+	DrawConnector(connector *component.Connector) string
+	DrawTriangle(triangle *component.Triangle) string
 }

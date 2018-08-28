@@ -15,8 +15,11 @@ const (
 	// DefaultLineLatex is the line latex for testing.
 	DefaultLineLatex = `\draw [fill={rgb,255:red,0;green,0;blue,0}, line width=0mm] (0,0) -- (0,0);`
 
-	// DefaultConnectorLatex is he connector latex for testing.
+	// DefaultConnectorLatex is the connector latex for testing.
 	DefaultConnectorLatex = `\draw [->, >=stealth, fill={rgb,255:red,0;green,0;blue,0}, line width=0mm] (0,0) -- (0,0);`
+
+	// DefaultTriangleLatex is the triangle latex for testing.
+	DefaultTriangleLatex = `\draw [draw={rgb,255:red,0;green,0;blue,0}, fill={rgb,255:red,0;green,0;blue,0}, line width=0mm] (0,0)  -- (4,0)  -- (4,4) -- cycle;`
 )
 
 // CreateDefaultLatex creates the default latex for testing from diffrent shapes.
@@ -57,6 +60,11 @@ func CreateFakeConnector() *component.Connector {
 // CreateFakePolygon creates fake polygon for testing.
 func CreateFakePolygon() *component.Polygon {
 	return component.NewPolygon()
+}
+
+// CreateFakeTriangle creates fake triangle for testing.
+func CreateFakeTriangle() *component.Triangle {
+	return component.NewTriangle()
 }
 func TestDefault(t *testing.T) {
 	drawer := tikz.Default()

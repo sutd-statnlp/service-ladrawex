@@ -27,6 +27,8 @@ type DrawexImplTestSuite struct {
 	fakeConnector  *component.Connector
 	polygonLatex   string
 	fakePolygon    *component.Polygon
+	triangleLatex  string
+	fakeTriangle   *component.Triangle
 }
 
 func (suite *DrawexImplTestSuite) SetupTest() {
@@ -52,6 +54,9 @@ func (suite *DrawexImplTestSuite) SetupTest() {
 
 	suite.polygonLatex = CreateDefaultLatex("regular polygon,regular polygon sides=5", "", 0, 0, 0)
 	suite.fakePolygon = CreateFakePolygon()
+
+	suite.triangleLatex = DefaultTriangleLatex
+	suite.fakeTriangle = CreateFakeTriangle()
 }
 
 func TestDrawexImplTestSuite(t *testing.T) {
@@ -136,4 +141,12 @@ func (suite *DrawexImplTestSuite) TestDrawPolygon() {
 	suite.True(len(latex) > 0)
 	suite.Equal(suite.polygonLatex, latex)
 	suite.Empty(suite.drawex.DrawPolygon(nil))
+}
+
+func (suite *DrawexImplTestSuite) TestDrawTriangle() {
+	latex := suite.drawex.DrawTriangle(suite.fakeTriangle)
+	suite.NotNil(latex)
+	suite.True(len(latex) > 0)
+	suite.Equal(suite.triangleLatex, latex)
+	suite.Empty(suite.drawex.DrawTriangle(nil))
 }

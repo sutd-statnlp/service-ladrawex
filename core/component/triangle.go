@@ -6,6 +6,7 @@ import (
 
 // Triangle is the triangle drawing component.
 type Triangle struct {
-	RightAngled bool
-	Common      *property.Common
+	SecondPosition *property.Position
+	ThirdPosition  *property.Position
+	Common         *property.Common
 }

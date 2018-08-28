@@ -49,6 +49,11 @@ func TestNewTriangle(t *testing.T) {
 	item := component.NewTriangle()
 	assert.NotNil(t, item)
 	assert.NotNil(t, item.Common)
+	assert.NotNil(t, item.SecondPosition)
+	assert.Equal(t, float32(4), item.SecondPosition.X)
+	assert.NotNil(t, item.ThirdPosition)
+	assert.Equal(t, float32(4), item.ThirdPosition.X)
+	assert.Equal(t, float32(4), item.ThirdPosition.Y)
 }
 
 func TestNewPolygon(t *testing.T) {

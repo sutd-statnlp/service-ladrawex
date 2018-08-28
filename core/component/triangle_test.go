@@ -11,5 +11,6 @@ func TestTriangle(t *testing.T) {
 	item := new(component.Triangle)
 	assert.NotNil(t, item)
 	assert.Nil(t, item.Common)
-	assert.False(t, item.RightAngled)
+	assert.Nil(t, item.SecondPosition)
+	assert.Nil(t, item.ThirdPosition)
 }

@@ -55,9 +55,15 @@ func NewText() *Text {
 
 // NewTriangle creates new triangle component.
 func NewTriangle() *Triangle {
-	return &Triangle{
-		Common: NewCommonProperty(),
+	item := &Triangle{
+		Common:         NewCommonProperty(),
+		SecondPosition: new(property.Position),
+		ThirdPosition:  new(property.Position),
 	}
+	item.SecondPosition.X = 4
+	item.ThirdPosition.X = 4
+	item.ThirdPosition.Y = 4
+	return item
 }
 
 // NewPolygon creates new polygon component.
