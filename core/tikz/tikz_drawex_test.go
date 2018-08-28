@@ -23,6 +23,8 @@ type DrawexImplTestSuite struct {
 	fakeText       *component.Text
 	diamondLatex   string
 	fakeDiamond    *component.Diamond
+	connectorLatex string
+	fakeConnector  *component.Connector
 }
 
 func (suite *DrawexImplTestSuite) SetupTest() {
@@ -42,6 +44,9 @@ func (suite *DrawexImplTestSuite) SetupTest() {
 
 	suite.diamondLatex = CreateDefaultLatex("diamond", "", 0, 0, 0)
 	suite.fakeDiamond = CreateFakeDiamond()
+
+	suite.connectorLatex = DefaultConnectorLatex
+	suite.fakeConnector = CreateFakeConnector()
 }
 
 func TestDrawexImplTestSuite(t *testing.T) {
@@ -106,4 +111,12 @@ func (suite *DrawexImplTestSuite) TestDrawDiamond() {
 	suite.True(len(latex) > 0)
 	suite.Equal(suite.diamondLatex, latex)
 	suite.Empty(suite.drawex.DrawText(nil))
+}
+
+func (suite *DrawexImplTestSuite) TestDrawConnector() {
+	latex := suite.drawex.DrawConnector(suite.fakeConnector)
+	suite.NotNil(latex)
+	suite.True(len(latex) > 0)
+	suite.Equal(suite.connectorLatex, latex)
+	suite.Empty(suite.drawex.DrawConnector(nil))
 }

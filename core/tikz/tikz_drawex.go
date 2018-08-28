@@ -34,6 +34,9 @@ const (
 
 	// LineDrawQuery is the query for drawing line component.
 	LineDrawQuery = `\draw [?, line width=?mm] (?,?) -- (?,?);`
+
+	// ConnectorDrawQuery is the query for drawing connector component.
+	ConnectorDrawQuery = `\draw [->, >=stealth, ?, line width=?mm] (?,?) -- (?,?);`
 )
 
 const (
@@ -157,4 +160,23 @@ func (drawex *DrawexImpl) DrawDiamond(diamon *component.Diamond) string {
 		return ""
 	}
 	return drawex.DrawNode(DiamondShape, diamon.Common)
+}
+
+// DrawConnector draws a connection and returns latex.
+func (drawex *DrawexImpl) DrawConnector(connector *component.Connector) string {
+	log.Debug("TikzDrawexImpl request to draw a connector: ", stringutil.JSON(connector))
+	if connector == nil {
+		log.Error("TikzDrawexImpl request to draw null connector")
+		return ""
+	}
+	color := ColorToQuery(FillRGBQuery, connector.Line.Color)
+	latex := stringutil.Prepare(ConnectorDrawQuery,
+		color,
+		connector.Line.Width,
+		connector.Line.StartPosition.X,
+		connector.Line.StartPosition.Y,
+		connector.Line.EndPosition.X,
+		connector.Line.EndPosition.Y,
+	)
+	return latex
 }

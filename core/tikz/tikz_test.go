@@ -14,6 +14,9 @@ import (
 const (
 	// DefaultLineLatex is the line latex for testing.
 	DefaultLineLatex = `\draw [fill={rgb,255:red,0;green,0;blue,0}, line width=0mm] (0,0) -- (0,0);`
+
+	// DefaultConnectorLatex is he connector latex for testing.
+	DefaultConnectorLatex = `\draw [->, >=stealth, fill={rgb,255:red,0;green,0;blue,0}, line width=0mm] (0,0) -- (0,0);`
 )
 
 // CreateDefaultLatex creates the default latex for testing from diffrent shapes.
@@ -44,6 +47,11 @@ func CreateFakeText() *component.Text {
 // CreateFakeDiamond creates fake diamond for testing.
 func CreateFakeDiamond() *component.Diamond {
 	return component.NewDiamond()
+}
+
+// CreateFakeConnector creates fake connector for testing.
+func CreateFakeConnector() *component.Connector {
+	return component.NewConnector()
 }
 func TestDefault(t *testing.T) {
 	drawer := tikz.Default()
