@@ -33,3 +33,10 @@ func Group(router *gin.Engine) bool {
 	}
 	return apiGroup != nil
 }
+
+// NewDrawexRestWithField creates new drawex rest with field.
+func NewDrawexRestWithField(drawex core.Drawex) DrawexRest {
+	return &DrawexRestImpl{
+		drawex: drawex,
+	}
+}
