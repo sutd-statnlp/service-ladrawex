@@ -1,7 +1,6 @@
 package api_test
 
 import (
-	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -9,7 +8,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/suite"
-	"github.com/sutd-statnlp/service-ladrawex/core"
 	"github.com/sutd-statnlp/service-ladrawex/web/api"
 )
 
@@ -19,20 +17,18 @@ const (
 
 type DrawexRestTestSuite struct {
 	suite.Suite
-	rest       api.DrawexRest
-	router     *gin.Engine
-	fakeBody   *strings.Reader
-	fakeDrawex core.Drawex
+	rest     api.DrawexRest
+	router   *gin.Engine
+	fakeBody *strings.Reader
 }
 
 func (suite *DrawexRestTestSuite) SetupSuite() {
 	suite.router = CreateFakeRouter()
 	suite.fakeBody = strings.NewReader(RequestJSON)
-	suite.fakeDrawex = CreareFakeDrawex()
 }
 
 func (suite *DrawexRestTestSuite) SetupTest() {
-	suite.rest = CreateFakeDrawexRestWithField(suite.fakeDrawex)
+	suite.rest = CreateFakeDrawexRest()
 }
 
 func TestDrawexRestTestSuite(t *testing.T) {
@@ -57,15 +53,4 @@ func (suite *DrawexRestTestSuite) TestPostDraw() {
 	suite.router.ServeHTTP(w, req)
 	suite.Equal(400, w.Code)
 	suite.NotNil(w.Body)
-}
-
-func (suite *DrawexRestTestSuite) TestDocumentFromRequestBody() {
-	var fakeRequestBody api.RequestBody
-	err := json.Unmarshal([]byte(RequestJSON), &fakeRequestBody)
-	suite.Nil(err)
-	suite.NotNil(fakeRequestBody)
-
-	doc := suite.rest.DocumentFromRequestBody(&fakeRequestBody)
-	suite.NotNil(doc)
-	suite.True(len(*doc) > 0)
 }
