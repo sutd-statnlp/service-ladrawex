@@ -1,10 +1,17 @@
 package api
 
 import (
+	"sync"
+
 	"github.com/gin-gonic/gin"
 	"github.com/sutd-statnlp/service-ladrawex/core"
 	"github.com/sutd-statnlp/service-ladrawex/core/component"
 	"github.com/sutd-statnlp/service-ladrawex/core/stringutil"
+)
+
+const (
+	// LatexChanCapacity is the capacity of latex buffered channel.
+	LatexChanCapacity = 9
 )
 
 var (
@@ -45,16 +52,53 @@ func NewDrawexRestWithField(drawex core.Drawex) DrawexRest {
 
 // DocumentFromRequestBody returns latex document from request body.
 func DocumentFromRequestBody(drawex core.Drawex, requestBody *RequestBody) *string {
+	var wg sync.WaitGroup
+	wg.Add(LatexChanCapacity)
+	latexChan := make(chan *string, LatexChanCapacity)
+	go func() {
+		defer wg.Done()
+		latexChan <- LatexFromRectangles(drawex, requestBody.Rectangles)
+	}()
+	go func() {
+		defer wg.Done()
+		latexChan <- LatexFromCircles(drawex, requestBody.Circles)
+	}()
+	go func() {
+		defer wg.Done()
+		latexChan <- LatexFromLines(drawex, requestBody.Lines)
+	}()
+	go func() {
+		defer wg.Done()
+		latexChan <- LatexFromTexts(drawex, requestBody.Texts)
+	}()
+	go func() {
+		defer wg.Done()
+		latexChan <- LatexFromDiamons(drawex, requestBody.Diamonds)
+	}()
+	go func() {
+		defer wg.Done()
+		latexChan <- LatexFromPolygons(drawex, requestBody.Polygons)
+	}()
+	go func() {
+		defer wg.Done()
+		latexChan <- LatexFromConnectors(drawex, requestBody.Connectors)
+	}()
+	go func() {
+		defer wg.Done()
+		latexChan <- LatexFromTriangles(drawex, requestBody.Triangles)
+	}()
+	go func() {
+		defer wg.Done()
+		latexChan <- LatexFromStars(drawex, requestBody.Stars)
+	}()
+	go func() {
+		wg.Wait()
+		close(latexChan)
+	}()
 	var latexs []*string
-	latexs = append(latexs, LatexFromRectangles(drawex, requestBody.Rectangles))
-	latexs = append(latexs, LatexFromCircles(drawex, requestBody.Circles))
-	latexs = append(latexs, LatexFromLines(drawex, requestBody.Lines))
-	latexs = append(latexs, LatexFromTexts(drawex, requestBody.Texts))
-	latexs = append(latexs, LatexFromDiamons(drawex, requestBody.Diamonds))
-	latexs = append(latexs, LatexFromPolygons(drawex, requestBody.Polygons))
-	latexs = append(latexs, LatexFromConnectors(drawex, requestBody.Connectors))
-	latexs = append(latexs, LatexFromTriangles(drawex, requestBody.Triangles))
-	latexs = append(latexs, LatexFromStars(drawex, requestBody.Stars))
+	for item := range latexChan {
+		latexs = append(latexs, item)
+	}
 	return drawex.Document(latexs)
 }
 
